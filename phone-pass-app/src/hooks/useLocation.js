@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-const useLocation = () => {
-  const [location, setLocation] = useState(null);
+// const useLocation = () => {
+//   const [location, setLocation] = useState(null);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setLocation({ latitude, longitude });
-      },
-      (error) => {
-        console.error("Error getting location:", error);
-      }
-    );
-  }, []);
+//   useEffect(() => {
+//     navigator.geolocation.getCurrentPosition(
+//       (position) => {
+//         const { latitude, longitude } = position.coords;
+//         setLocation({ latitude, longitude });
+//       },
+//       (error) => {
+//         console.error("Error getting location:", error);
+//       }
+//     );
+//   }, []);
 
-  return location;
-};
+//   return location;
+// };
 
-export default useLocation;
+// export default useLocation;

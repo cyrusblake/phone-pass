@@ -1,16 +1,14 @@
 import React from "react";
-import UserProfile from "../components/UserProfile";
-import { useAuth } from "../context/AuthContext";
+import Navbar from "../components/Navbar";
 
-const Profile = () => {
-  const { currentUser } = useAuth();
-
+const Home = () => {
   return (
     <div>
-      <h1>Profile</h1>
-      {currentUser && <UserProfile userId={currentUser.uid} />}
+      <Navbar/>
+      <h1>Welcome to PhonePass!</h1>
+      <p>Connect with users nearby and exchange data.</p>
     </div>
   );
 };
 
-export default Profile;
+export default Home;
