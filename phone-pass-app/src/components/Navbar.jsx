@@ -1,29 +1,36 @@
-import React, { use } from "react";
-import { signInWithGoogle, signOutFromGoogle } from "../api/auth";
-import useAuth from "../hooks/useAuth";
-
-
+import React from "react";
+import '../styles/components/navbar.css';
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { user, loading} = useAuth();
-  // const { currentUser, logOut } = useAuth();
+  const { user, loading, signIn, signOut } = useAuth();
+
+  const handleClick = () => {
+    if (user) {
+      signOut();
+    } else {
+      signIn();
+    }
+  };
 
   return (
-    <nav>
+    <nav className="navbar">
       <div>
-
-      <h1>PhonePass</h1>
-      {!loading && (
-        <button 
-          type='button'
-          className=''
-          onClick={user ? signOutFromGoogle : signInWithGoogle}
-        >
-        Log {user ? 'out' : 'in'}
-        </button>
-      )}
+        <h1>
+        <a href="/">PhonePass</a>
+        </h1>
       </div>
-      
+      <div>
+        {!loading && (
+          <button 
+            type='button'
+            className=''
+            onClick={handleClick}
+          >
+          Log {user ? 'out' : 'in'}
+          </button>
+        )}
+      </div>
     </nav>
   );
 };

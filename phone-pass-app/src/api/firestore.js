@@ -1,62 +1,35 @@
-// import { doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
-// import { db } from "./firebase";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
-// // Save user profile
-// export const saveUserProfile = async (userId, profileData) => {
-//   try {
-//     await setDoc(doc(db, "users", userId), profileData);
-//   } catch (error) {
-//     console.error("Error saving user profile:", error);
-//     throw error;
-//   }
-// };
+const db = getFirestore();
 
-// // Log interaction
-// export const logInteraction = async (userId, interactionData) => {
-//   try {
-//     await setDoc(doc(db, "interactions", userId), interactionData);
-//   } catch (error) {
-//     console.error("Error logging interaction:", error);
-//     throw error;
-//   }
-// };
+export const getUserProfile = async (uid) => {
+  const userDoc = doc(db, "users", uid);
+  const userSnapshot = await getDoc(userDoc);
+  if (userSnapshot.exists()) {
+    return userSnapshot.data();
+  } else {
+    console.log("No such user!");
+    return null;
+  }
+};
 
-// // Get user profile
-// export const getUserProfile = async (userId) => {
-//   try {
-//     const docRef = doc(db, "users", userId);
-//     const docSnap = await getDoc(docRef);
-//     if (docSnap.exists()) {
-//       return docSnap.data();
-//     } else {
-//       console.error("No such user!");
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error("Error fetching user profile:", error);
-//     throw error;
-//   }
-// };
+export const getUserAccount = async (uid) => {
+  const userDoc = doc(db, "profiles", uid);
+  const userSnapshot = await getDoc(userDoc);
+  if (userSnapshot.exists()) {
+    return userSnapshot.data();
+  } else {
+    console.log("No such user!");
+    return null;
+  }
+}
 
-// // Find nearby users
-// export const findNearbyUsers = async (latitude, longitude, radius) => {
-//   try {
-//     const usersRef = collection(db, "users");
-//     const q = query(
-//       usersRef,
-//       where("latitude", ">=", latitude - radius),
-//       where("latitude", "<=", latitude + radius),
-//       where("longitude", ">=", longitude - radius),
-//       where("longitude", "<=", longitude + radius)
-//     );
-//     const querySnapshot = await getDocs(q);
-//     const nearbyUsers = [];
-//     querySnapshot.forEach((doc) => {
-//       nearbyUsers.push(doc.data());
-//     });
-//     return nearbyUsers;
-//   } catch (error) {
-//     console.error("Error finding nearby users:", error);
-//     throw error;
-//   }
-// };
+export const createUserProfile = async (uid, profile) => {
+  const userDoc = doc(db, "users", uid);
+  await setDoc(userDoc, profile);
+};
+
+export const accountProfile = async(uid, profile) => {
+  const userDoc = doc(db, "profiles", uid);
+  await setDoc(userDoc, profile);
+}

@@ -1,5 +1,6 @@
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+
 import { auth, googleProvider, signInWithPopup } from "./firebase";
+import { getUserProfile, createUserProfile } from "./firestore";
 
 // Sign up with google
 export const signInWithGoogle = async () => {
@@ -8,8 +9,19 @@ export const signInWithGoogle = async () => {
     provider.setCustomParameters({
       prompt: 'select_account'
     });
+
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
+
+    const profile = await getUserProfile(user.uid);
+    if (!profile) {
+      await createUserProfile(user.uid, {
+        email: user.email,
+        name: user.displayName, // Updated from user.name to user.displayName
+        uid: user.uid
+      });
+    }
+
     window.alert(`Signed in with ${user.email}`);
     window.location.reload();
   } catch (e) {
