@@ -20,13 +20,12 @@ import { db } from "../api/firebase";
 import pImage from '../assets/square.png';
 import '../styles/components/home.css';
 
-const GEO_DISTANCE_THRESHOLD = 0.05; // Approx 5km, adjust as needed
-
 const Home = () => {
   const { user } = useAuth();
   const [interactedUsers, setInteractedUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [radius, setRadius] = useState(0.1); // Default radius of 10km
 
   useEffect(() => {
     if (user) {
@@ -83,7 +82,7 @@ const Home = () => {
             const distance = getDistance(latitude, longitude, lat2, lon2);
             console.log(`Distance to user ${docSnap.id}: ${distance} km`);
   
-            if (distance < GEO_DISTANCE_THRESHOLD) {
+            if (distance < radius) { // Use the dynamic radius here
               console.log(`User ${docSnap.id} is within the threshold. Logging interaction...`);
               await logInteraction(user.uid, docSnap.id);
   
@@ -189,6 +188,19 @@ const Home = () => {
         <button className="btn btn-secondary" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? 'Light Mode' : 'Dark Mode'}
         </button>
+
+        {/* Radius Selection */}
+        <div className="radius-selection">
+          <label htmlFor="radius">Set Radius (in km): </label>
+          <input
+            type="number"
+            id="radius"
+            value={radius}
+            onChange={(e) => setRadius(parseFloat(e.target.value))}
+            min="0.01"
+            step="0.01"
+          />
+        </div>
         
         <h2>Interacted Users</h2>
         <div className="interacted-users-container">
