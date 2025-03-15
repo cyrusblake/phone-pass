@@ -78,53 +78,84 @@ const Home = () => {
     try {
       const usersRef = collection(db, "users");
       const snapshot = await getDocs(usersRef, { source: 'server' }); // Force fetch from server
-      const nearbyUsers = [];
-  
+      const nearbyUsers = new Map(); // Use a Map to avoid duplicates
+      const pastInteractions = new Map(); // Use a Map to avoid duplicates
+
       console.log(`Checking nearby users for ${user.uid} at (${latitude}, ${longitude})`);
       console.log(`Total users in Firestore: ${snapshot.docs.length}`);
-  
+
+      // Fetch past interactions
+      const interactionsRef = collection(db, "interactions");
+      const interactionsQuery = query(
+        interactionsRef,
+        where("users", "array-contains", user.uid)
+      );
+      const interactionsSnapshot = await getDocs(interactionsQuery, { source: 'server' });
+
+      // Add past interactions to the Map
+      for (const interactionDoc of interactionsSnapshot.docs) {
+        const interactionData = interactionDoc.data();
+        const otherUserId = interactionData.users.find(id => id !== user.uid);
+        const profileRef = doc(db, "profiles", otherUserId);
+        const profileSnap = await getDoc(profileRef, { source: 'server' });
+
+        if (profileSnap.exists()) {
+          const profileData = profileSnap.data();
+          pastInteractions.set(otherUserId, {
+            username: profileData.username || "Unknown",
+            bio: profileData.bio || "No bio available",
+            meetCount: interactionData.meetCount || 1,
+            lastMet: interactionData.lastMet?.toDate() || new Date(),
+          });
+        }
+      }
+
+      // Check for nearby users
       for (const docSnap of snapshot.docs) {
         if (docSnap.id !== user.uid) {
           const userData = docSnap.data();
           console.log(`Checking user ${docSnap.id}:`, userData);
-  
+
           if (userData.location) {
             const { latitude: lat2, longitude: lon2 } = userData.location;
             const distance = getDistance(latitude, longitude, lat2, lon2);
             console.log(`Distance to user ${docSnap.id}: ${distance} km`);
-  
+
             if (distance < GEO_DISTANCE_THRESHOLD) { // Use the updated threshold here
               console.log(`User ${docSnap.id} is within the threshold. Logging interaction...`);
-  
+
               // Fetch username and bio from profiles collection
               const profileRef = doc(db, "profiles", docSnap.id);
-              const profileSnap = await getDoc(profileRef, { source: 'server' }); // Force fetch from server
+              const profileSnap = await getDoc(profileRef, { source: 'server' });
               let username = "Unknown";
               let bio = "No bio available";
-  
+
               if (profileSnap.exists()) {
                 const profileData = profileSnap.data();
                 username = profileData.username || "Unknown";
                 bio = profileData.bio || "No bio available";
               }
-  
+
               // Log the interaction with usernames
               await logInteraction(user.uid, docSnap.id, username);
-  
+
               // Fetch meet count from interactions collection
               const interactionId = user.uid < docSnap.id ? `${user.uid}_${docSnap.id}` : `${docSnap.id}_${user.uid}`;
               const interactionRef = doc(db, "interactions", interactionId);
-              const interactionSnap = await getDoc(interactionRef, { source: 'server' }); // Force fetch from server
+              const interactionSnap = await getDoc(interactionRef, { source: 'server' });
               const meetCount = interactionSnap.exists() ? interactionSnap.data().meetCount : 1;
-  
-              nearbyUsers.push({ username, bio, meetCount });
+
+              // Add to nearbyUsers Map
+              nearbyUsers.set(docSnap.id, { username, bio, meetCount });
             }
           }
         }
       }
-  
-      console.log("Nearby users:", nearbyUsers);
-      setInteractedUsers(nearbyUsers);
+
+      // Combine nearby users and past interactions, ensuring no duplicates
+      const allUsers = new Map([...pastInteractions, ...nearbyUsers]);
+      console.log("All users (nearby + past interactions, no duplicates):", Array.from(allUsers.values()));
+      setInteractedUsers(Array.from(allUsers.values()));
       setIsLoading(false);
     } catch (error) {
       console.error("Error checking nearby users:", error);
