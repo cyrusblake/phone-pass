@@ -63,47 +63,51 @@ const Home = () => {
 
   const checkNearbyUsers = async (latitude, longitude) => {
     if (!user) return;
-  
+
     try {
       const usersRef = collection(db, "users");
-      const snapshot = await getDocs(usersRef);
-      const nearbyUsers = [];
-  
-      for (const docSnap of snapshot.docs) {
-        if (docSnap.id !== user.uid) {
-          const userData = docSnap.data();
-          if (userData.location) {
-            const { latitude: lat2, longitude: lon2 } = userData.location;
-            const distance = getDistance(latitude, longitude, lat2, lon2);
-            if (distance < GEO_DISTANCE_THRESHOLD) {
-              await logInteraction(user.uid, docSnap.id);
-  
-              // Fetch username and bio from profiles collection
-              const profileRef = doc(db, "profiles", docSnap.id);
-              const profileSnap = await getDoc(profileRef);
-              let username = "Unknown";
-              let bio = "No bio available";
-  
-              if (profileSnap.exists()) {
-                const profileData = profileSnap.data();
-                username = profileData.username || "Unknown";
-                bio = profileData.bio || "No bio available";
+      const unsubscribe = onSnapshot(usersRef, async (snapshot) => {
+        const nearbyUsers = [];
+
+        for (const docSnap of snapshot.docs) {
+          if (docSnap.id !== user.uid) {
+            const userData = docSnap.data();
+            if (userData.location) {
+              const { latitude: lat2, longitude: lon2 } = userData.location;
+              const distance = getDistance(latitude, longitude, lat2, lon2);
+              if (distance < GEO_DISTANCE_THRESHOLD) {
+                await logInteraction(user.uid, docSnap.id);
+
+                // Fetch username and bio from profiles collection
+                const profileRef = doc(db, "profiles", docSnap.id);
+                const profileSnap = await getDoc(profileRef);
+                let username = "Unknown";
+                let bio = "No bio available";
+
+                if (profileSnap.exists()) {
+                  const profileData = profileSnap.data();
+                  username = profileData.username || "Unknown";
+                  bio = profileData.bio || "No bio available";
+                }
+
+                // Fetch meet count from interactions collection
+                const interactionId = user.uid < docSnap.id ? `${user.uid}_${docSnap.id}` : `${docSnap.id}_${user.uid}`;
+                const interactionRef = doc(db, "interactions", interactionId);
+                const interactionSnap = await getDoc(interactionRef);
+                const meetCount = interactionSnap.exists() ? interactionSnap.data().meetCount : 1;
+
+                nearbyUsers.push({ username, bio, meetCount });
               }
-  
-              // Fetch meet count from interactions collection
-              const interactionId = user.uid < docSnap.id ? `${user.uid}_${docSnap.id}` : `${docSnap.id}_${user.uid}`;
-              const interactionRef = doc(db, "interactions", interactionId);
-              const interactionSnap = await getDoc(interactionRef);
-              const meetCount = interactionSnap.exists() ? interactionSnap.data().meetCount : 1;
-  
-              nearbyUsers.push({ username, bio, meetCount });
             }
           }
         }
-      }
-  
-      setInteractedUsers(nearbyUsers);
-      setIsLoading(false);
+
+        setInteractedUsers(nearbyUsers);
+        setIsLoading(false);
+      });
+
+      // Cleanup listener on unmount
+      return () => unsubscribe();
     } catch (error) {
       console.error("Error checking nearby users:", error);
     }
@@ -112,15 +116,15 @@ const Home = () => {
   const logInteraction = async (userId1, userId2) => {
     const interactionId = userId1 < userId2 ? `${userId1}_${userId2}` : `${userId2}_${userId1}`;
     const interactionRef = doc(db, "interactions", interactionId);
-  
+
     try {
       const interactionSnap = await getDoc(interactionRef);
       const now = new Date();
-      
+
       if (interactionSnap.exists()) {
         const interactionData = interactionSnap.data();
         const lastMet = interactionData.lastMet?.toDate(); // Convert Firestore timestamp to JS Date
-  
+
         if (lastMet) {
           const hoursSinceLastMeet = (now - lastMet) / (1000 * 60 * 60); // Convert milliseconds to hours
           if (hoursSinceLastMeet < 24) {
@@ -128,14 +132,14 @@ const Home = () => {
           }
         }
       }
-  
+
       // Update the existing document with the new lastMet timestamp and increment meetCount
       await setDoc(interactionRef, {
         users: [userId1, userId2],
         meetCount: increment(1), // Increment the count
         lastMet: serverTimestamp(), // Update the lastMet timestamp
       }, { merge: true }); // Use merge to update the existing document
-  
+
     } catch (error) {
       console.error("Error logging interaction:", error);
     }
