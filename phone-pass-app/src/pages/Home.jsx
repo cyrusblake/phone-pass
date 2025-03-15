@@ -95,7 +95,6 @@ const Home = () => {
   
             if (distance < GEO_DISTANCE_THRESHOLD) { // Use the updated threshold here
               console.log(`User ${docSnap.id} is within the threshold. Logging interaction...`);
-              await logInteraction(user.uid, docSnap.id);
   
               // Fetch username and bio from profiles collection
               const profileRef = doc(db, "profiles", docSnap.id);
@@ -108,6 +107,9 @@ const Home = () => {
                 username = profileData.username || "Unknown";
                 bio = profileData.bio || "No bio available";
               }
+  
+              // Log the interaction with usernames
+              await logInteraction(user.uid, docSnap.id, username);
   
               // Fetch meet count from interactions collection
               const interactionId = user.uid < docSnap.id ? `${user.uid}_${docSnap.id}` : `${docSnap.id}_${user.uid}`;
@@ -129,7 +131,7 @@ const Home = () => {
     }
   };
 
-  const logInteraction = async (userId1, userId2) => {
+  const logInteraction = async (userId1, userId2, username2) => {
     const interactionId = userId1 < userId2 ? `${userId1}_${userId2}` : `${userId2}_${userId1}`;
     const interactionRef = doc(db, "interactions", interactionId);
 
@@ -156,9 +158,15 @@ const Home = () => {
         }
       }
 
+      // Fetch the username of the current user (userId1)
+      const profileRef1 = doc(db, "profiles", userId1);
+      const profileSnap1 = await getDoc(profileRef1, { source: 'server' });
+      const username1 = profileSnap1.exists() ? profileSnap1.data().username : "Unknown";
+
       console.log("Updating interaction document...");
       await setDoc(interactionRef, {
         users: [userId1, userId2],
+        usernames: [username1, username2], // Add usernames to the interaction document
         meetCount: increment(1), // Increment the count
         lastMet: serverTimestamp(), // Update the lastMet timestamp
       }, { merge: true }); // Use merge to update the existing document
