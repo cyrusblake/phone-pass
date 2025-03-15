@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div>
-        <h1>
+        <h1 className="nh">
         <a href="/">PhonePass</a>
         </h1>
       </div>
@@ -24,7 +24,7 @@ const Navbar = () => {
         {!loading && (
           <button 
             type='button'
-            className=''
+            className='nb'
             onClick={handleClick}
           >
           Log {user ? 'out' : 'in'}

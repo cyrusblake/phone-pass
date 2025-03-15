@@ -1,0 +1,15 @@
+.container {
+    border: px solid blue;
+    border-style: solid;
+    border-color: blue;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+   
+}
+
+.pp {
+    width: 250px;
+   
+}
+
