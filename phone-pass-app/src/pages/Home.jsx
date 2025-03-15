@@ -129,12 +129,12 @@ const Home = () => {
         }
       }
   
-      // Always increment the meetCount, regardless of the time elapsed
+      // Update the existing document with the new lastMet timestamp and increment meetCount
       await setDoc(interactionRef, {
         users: [userId1, userId2],
-        meetCount: increment(1), // Always increment the count
+        meetCount: increment(1), // Increment the count
         lastMet: serverTimestamp(), // Update the lastMet timestamp
-      }, { merge: true });
+      }, { merge: true }); // Use merge to update the existing document
   
     } catch (error) {
       console.error("Error logging interaction:", error);
