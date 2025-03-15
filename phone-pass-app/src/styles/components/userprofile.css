@@ -77,7 +77,7 @@
     max-width: 400px; /* Limit button width */
   }
   
-  button:hover {
+  .u-button:hover {
     background-color: #27ae60; /* Darker green on hover */
   }
   
@@ -122,4 +122,18 @@
   
   body.dark-mode .dark-mode-button:hover {
     color: #2ecc71; /* Green color on hover */
+  }
+  
+  /* Spacing for h1 (Profile) */
+  .profile-heading {
+    margin-top: 80px; /* Add space between navbar and h1 */
+    text-align: center; /* Center-align the heading */
+    font-size: 2.5rem; /* Larger font size */
+    font-weight: 600; /* Bold text */
+    color: #333; /* Dark text color */
+  }
+  
+  /* Dark mode styles for h1 */
+  body.dark-mode .profile-heading {
+    color: #ffffff; /* White text color for dark mode */
   }

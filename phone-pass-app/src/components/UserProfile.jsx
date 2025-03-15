@@ -60,6 +60,9 @@ const UserProfile = () => {
 
   return (
     <div>
+      <div className="profile-heading">
+        <h1>Profile</h1>
+      </div>
       <div className="container">
         <div>
           <img src={pImage} className="pp" alt="Profile" />
