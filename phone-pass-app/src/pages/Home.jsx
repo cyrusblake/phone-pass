@@ -42,15 +42,25 @@ const Home = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const { latitude, longitude } = position.coords;
-          console.log(`User location: (${latitude}, ${longitude})`);
+          const { latitude, longitude, accuracy } = position.coords;
+          console.log(`User location: (${latitude}, ${longitude}) with accuracy: ${accuracy} meters`);
+          if (accuracy > 1000) { // If accuracy is worse than 1km, warn the user
+            console.warn("Geolocation accuracy is low. Results may be inaccurate.");
+          }
           await updateUserLocation(latitude, longitude);
           checkNearbyUsers(latitude, longitude);
         },
         (error) => {
           console.error("Error getting location", error);
+        },
+        {
+          timeout: 10000, // 10 seconds
+          maximumAge: 0, // Do not use a cached position
+          enableHighAccuracy: true, // Request high accuracy
         }
       );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
     }
   };
 
