@@ -43,6 +43,7 @@ const Home = () => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
+          console.log(`User location: (${latitude}, ${longitude})`);
           await updateUserLocation(latitude, longitude);
           checkNearbyUsers(latitude, longitude);
         },
@@ -69,13 +70,18 @@ const Home = () => {
       const unsubscribe = onSnapshot(usersRef, async (snapshot) => {
         const nearbyUsers = [];
 
+        console.log(`Checking nearby users for ${user.uid} at (${latitude}, ${longitude})`);
+
         for (const docSnap of snapshot.docs) {
           if (docSnap.id !== user.uid) {
             const userData = docSnap.data();
             if (userData.location) {
               const { latitude: lat2, longitude: lon2 } = userData.location;
               const distance = getDistance(latitude, longitude, lat2, lon2);
+              console.log(`Distance to user ${docSnap.id}: ${distance} km`);
+
               if (distance < GEO_DISTANCE_THRESHOLD) {
+                console.log(`User ${docSnap.id} is within the threshold. Logging interaction...`);
                 await logInteraction(user.uid, docSnap.id);
 
                 // Fetch username and bio from profiles collection
@@ -102,6 +108,7 @@ const Home = () => {
           }
         }
 
+        console.log("Nearby users:", nearbyUsers);
         setInteractedUsers(nearbyUsers);
         setIsLoading(false);
       });
@@ -121,25 +128,33 @@ const Home = () => {
       const interactionSnap = await getDoc(interactionRef);
       const now = new Date();
 
+      console.log(`Checking interaction between ${userId1} and ${userId2}`);
+
       if (interactionSnap.exists()) {
         const interactionData = interactionSnap.data();
         const lastMet = interactionData.lastMet?.toDate(); // Convert Firestore timestamp to JS Date
 
+        console.log(`Last met: ${lastMet}`);
+
         if (lastMet) {
           const hoursSinceLastMeet = (now - lastMet) / (1000 * 60 * 60); // Convert milliseconds to hours
+          console.log(`Hours since last meet: ${hoursSinceLastMeet}`);
+
           if (hoursSinceLastMeet < 24) {
+            console.log("Interaction happened in the last 24 hours. Exiting.");
             return; // Exit function early if interaction happened in the last 24 hours
           }
         }
       }
 
-      // Update the existing document with the new lastMet timestamp and increment meetCount
+      console.log("Updating interaction document...");
       await setDoc(interactionRef, {
         users: [userId1, userId2],
         meetCount: increment(1), // Increment the count
         lastMet: serverTimestamp(), // Update the lastMet timestamp
       }, { merge: true }); // Use merge to update the existing document
 
+      console.log("Interaction document updated successfully.");
     } catch (error) {
       console.error("Error logging interaction:", error);
     }
