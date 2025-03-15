@@ -1,5 +1,5 @@
-import React, { useState, useEffect, use } from "react";
-import { getUserProfile, getUserAccount, createUserProfile, accountProfile} from "../api/firestore";
+import React, { useState, useEffect } from "react";
+import { getUserProfile, getUserAccount, createUserProfile, accountProfile } from "../api/firestore";
 import { useAuth } from "../context/AuthContext";
 import '../styles/components/userprofile.css';
 import pImage from '../assets/square.png';
@@ -9,7 +9,6 @@ const UserProfile = () => {
   const [profile, setProfile] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
   const [userName, setuserName] = useState("");
   const [bio, setBio] = useState("");
 
@@ -19,7 +18,7 @@ const UserProfile = () => {
         const profileData = await getUserProfile(user.uid);
         setProfile(profileData);
         setName(profileData?.name || "");
-        setEmail(profileData?.email || "") 
+        setEmail(profileData?.email || "");
       };
       fetchProfile();
     }
@@ -30,16 +29,12 @@ const UserProfile = () => {
       const fetchProfile = async () => {
         const accountData = await getUserAccount(user.uid);
         setProfile(accountData);
-        setuserName(accountData?.username);
-        setBio(accountData?.bio);
-        
-
+        setuserName(accountData?.username || "");
+        setBio(accountData?.bio || "");
       };
       fetchProfile();
     }
   }, [user]);
-
-
 
   const handleSave = async () => {
     if (user) {
@@ -58,7 +53,6 @@ const UserProfile = () => {
         bio: bio,
         uid: user.uid,
         username: userName
-       
       });
       alert("Profile saved!");
     }
@@ -66,44 +60,31 @@ const UserProfile = () => {
 
   return (
     <div>
-      {/* <h2>{name}</h2> */}
-      {/* <h2>{email}</h2> */}
-
       <div className="container">
-          <div>
-          <img src={pImage} className="pp"></img>
-          </div>
-          <div>
-            <h2>{userName}</h2>
-            <h2>{bio}</h2>
-          </div>
-            
-
+        <div>
+          <img src={pImage} className="pp" alt="Profile" />
+        </div>
+        <div className="user-info">
+          <h2>{userName}</h2>
+          <h2>{bio}</h2>
+        </div>
       </div>
-      
 
-      {/* <input
-        type="text"
-        // value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Enter your name"
-      />
-      <button onClick={handleSave}>Save</button> */}
-
-      <input
-        type="text"
-        // value={name}
-        onChange={(e) => setuserName(e.target.value)}
-        placeholder="Enter your name"
-      />
-      <input
-        type="text"
-        // value={name}
-        onChange={(e) => setBio(e.target.value)}
-        placeholder="Enter the bio"
-      />
-      
-      <button onClick={handleSave2}>Save</button>
+      <div style={{ maxWidth: "800px", margin: "20px auto", padding: "0 20px" }}>
+        <input
+          type="text"
+          value={userName}
+          onChange={(e) => setuserName(e.target.value)}
+          placeholder="Enter your username"
+        />
+        <input
+          type="text"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          placeholder="Enter your bio"
+        />
+        <button onClick={handleSave2} className="u-button">Save</button>
+      </div>
     </div>
   );
 };

@@ -129,11 +129,11 @@ const Home = () => {
         }
       }
   
-      // If no recent interaction, log it
+      // Always increment the meetCount, regardless of the time elapsed
       await setDoc(interactionRef, {
         users: [userId1, userId2],
-        meetCount: interactionSnap.exists() ? increment(1) : 1, // Increment if exists, otherwise start at 1
-        lastMet: serverTimestamp(),
+        meetCount: increment(1), // Always increment the count
+        lastMet: serverTimestamp(), // Update the lastMet timestamp
       }, { merge: true });
   
     } catch (error) {
