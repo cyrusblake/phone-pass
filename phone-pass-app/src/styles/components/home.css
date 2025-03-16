@@ -188,6 +188,11 @@ p {
   background-color: #27ae60; /* Darker green on hover */
 }
 
+.m-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* Empty State */
 .empty-state {
   text-align: center;

@@ -230,15 +230,21 @@ const Home = () => {
           <h1>Welcome {user ? user.displayName : "Guest"} to PhonePass!</h1>
           <p>Connect with users nearby and exchange data.</p>
         </div>
+
+
         {user && (
           <Link to="/profile" className="btn btn-primary">
             Go to Profile
           </Link>
         )}
+
+        <div style={{ width: '10px', display: 'inline-block' }} />
+
         <button className="btn btn-secondary" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? 'Light Mode' : 'Dark Mode'}
         </button>
-        
+
+
         <h2>Interacted Users</h2>
         <div className="interacted-users-container">
           {interactedUsers.length === 0 && !isLoading ? (
