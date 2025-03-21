@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import ViewPage from "./pages/ViewPage";
+import Home from "./pages/Home.jsx";
+import Profile from "./pages/Profile.jsx";
+import ViewPage from "./pages/ViewPage.jsx";
 import Navbar from "./components/Navbar";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext.jsx";
 import './App.css';
 
 const App = () => {
