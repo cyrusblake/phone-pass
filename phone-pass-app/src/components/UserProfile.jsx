@@ -64,9 +64,8 @@ const UserProfile = () => {
         <h1>Profile</h1>
       </div>
       <div className="container">
-        <div>
-          <img src={pImage} className="pp" alt="Profile" />
-        </div>
+        
+        <img src={pImage} className="pp" alt="Profile" />
         <div className="user-info">
           <h2>{userName}</h2>
           <h2>{bio}</h2>

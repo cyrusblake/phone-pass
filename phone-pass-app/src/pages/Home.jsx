@@ -102,6 +102,7 @@ const Home = () => {
         if (profileSnap.exists()) {
           const profileData = profileSnap.data();
           pastInteractions.set(otherUserId, {
+            userId: otherUserId, // Add userId
             username: profileData.username || "Unknown",
             bio: profileData.bio || "No bio available",
             meetCount: interactionData.meetCount || 1,
@@ -146,7 +147,12 @@ const Home = () => {
               const meetCount = interactionSnap.exists() ? interactionSnap.data().meetCount : 1;
 
               // Add to nearbyUsers Map
-              nearbyUsers.set(docSnap.id, { username, bio, meetCount });
+              nearbyUsers.set(docSnap.id, { 
+                userId: docSnap.id, // Add userId
+                username, 
+                bio, 
+                meetCount 
+              });
             }
           }
         }
@@ -231,7 +237,6 @@ const Home = () => {
           <p>Connect with users nearby and exchange data.</p>
         </div>
 
-
         {user && (
           <Link to="/profile" className="btn btn-primary">
             Go to Profile
@@ -243,7 +248,6 @@ const Home = () => {
         <button className="btn btn-secondary" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? 'Light Mode' : 'Dark Mode'}
         </button>
-
 
         <h2>Interacted Users</h2>
         <div className="interacted-users-container">
@@ -260,7 +264,10 @@ const Home = () => {
                 </div>
                 <div>
                   <h3>
-                    <strong>{interaction.username}</strong> - Met {interaction.meetCount} time(s)
+                    {/* Make the username clickable */}
+                    <Link to={`/ViewPage/${interaction.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <strong>{interaction.username}</strong>
+                    </Link> - Met {interaction.meetCount} time(s)
                   </h3>
                   <h3><em>{interaction.bio}</em></h3>
                   <button className="btn btn-secondary">Send Message</button>
