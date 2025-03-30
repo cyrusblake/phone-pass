@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import '../styles/components/userprofile.css';
 import pImage from '../assets/square.png';
 
+
 const UserProfile = () => {
   const { user } = useAuth();
   const [profile, setProfile] = useState(null);
@@ -87,6 +88,7 @@ const UserProfile = () => {
         />
         <button onClick={handleSave2} className="u-button">Save</button>
       </div>
+      {/* <UpdateUsername /> */}
     </div>
   );
 };

@@ -17,7 +17,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div>
         <h1 className="nh">
-        <a href="/">PhonePass</a>
+          <a href="/">PhonePass</a>
         </h1>
       </div>
       <div>
@@ -27,7 +27,7 @@ const Navbar = () => {
             className='nb'
             onClick={handleClick}
           >
-          Log {user ? 'out' : 'in'}
+            Log {user ? 'out' : 'in'}
           </button>
         )}
       </div>

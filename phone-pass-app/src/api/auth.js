@@ -1,13 +1,14 @@
-
 import { auth, googleProvider, signInWithPopup } from "./firebase";
 import { getUserProfile, createUserProfile } from "./firestore";
+import { signOut } from "firebase/auth";
+import { toast } from "react-toastify"; // Use for better notifications
 
-// Sign up with google
+// Sign in with Google
 export const signInWithGoogle = async () => {
   try {
     const provider = googleProvider;
     provider.setCustomParameters({
-      prompt: 'select_account'
+      prompt: "select_account",
     });
 
     const result = await signInWithPopup(auth, provider);
@@ -17,58 +18,32 @@ export const signInWithGoogle = async () => {
     if (!profile) {
       await createUserProfile(user.uid, {
         email: user.email,
-        name: user.displayName, // Updated from user.name to user.displayName
-        uid: user.uid
+        name: user.displayName,
+        uid: user.uid,
       });
     }
 
-    window.alert(`Signed in with ${user.email}`);
-    window.location.reload();
+    toast.success(`Signed in as ${user.email}`);
   } catch (e) {
-    window.alert(e.message);
+    if (e.code === "auth/popup-closed-by-user") {
+      toast.warning("Sign-in popup closed. Try again.");
+    } else if (e.code === "auth/cancelled-popup-request") {
+      toast.warning("Sign-in request was canceled. Try again.");
+    } else if (e.code === "auth/popup-blocked") {
+      toast.warning("Popup was blocked. Allow popups for this site.");
+    } else {
+      toast.error(`Sign-in error: ${e.message}`);
+    }
   }
 };
 
-// Sign out from google
+// Sign out
 export const signOutFromGoogle = async () => {
   try {
-    await auth.signOut();
-    window.alert("Signed out!");
-    window.location.reload();
+    await signOut(auth);
+    toast.info("Signed out!");
   } catch (e) {
-    window.alert(e.message);
+    toast.error(`Sign-out error: ${e.message}`);
   }
 };
 
-
-// // Sign up
-// export const signUp = async (email, password) => {
-//   try {
-//     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-//     return userCredential.user;
-//   } catch (error) {
-//     console.error("Error signing up:", error);
-//     throw error;
-//   }
-// };
-
-// // Log in
-// export const logIn = async (email, password) => {
-//   try {
-//     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-//     return userCredential.user;
-//   } catch (error) {
-//     console.error("Error logging in:", error);
-//     throw error;
-//   }
-// };
-
-// // Log out
-// export const logOut = async () => {
-//   try {
-//     await signOut(auth);
-//   } catch (error) {
-//     console.error("Error logging out:", error);
-//     throw error;
-//   }
-// };

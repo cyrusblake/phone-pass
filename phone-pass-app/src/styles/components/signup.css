@@ -1,0 +1,84 @@
+/* Add this to your existing CSS */
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  .nav-container{
+    margin-bottom: 25px;
+  }
+  
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Add this for vertical centering */
+    background-color: limegreen;
+    padding: 20px; /* Increased padding for better spacing */
+    width: min-content;
+    /* min-height: 100vh; */
+    margin: 0 auto; /* Center horizontally */
+    box-sizing: border-box; /* Include padding in width calculation */
+    border-radius: 10px;
+}
+  
+.form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 310px;
+    background-color: white; 
+    border-radius: 10px; /* Optional: for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: for subtle shadow */
+}
+  
+  /* Rest of your existing styles... */
+.form-container h1 {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+input {
+    border: solid 1px;
+    background-color: white;
+    width: 90%;
+    margin-left: 10px;
+    height: 33px;
+    color: black;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+/* #google-sign-up-button {
+    background-color: rgb(36, 95, 255);
+    border: none;
+    height: 40px;
+    color: white;
+    width: 150px;
+    font-size: 14.5px;
+    margin-left: 10px;
+
+} */
+
+#sign-up-button {
+    background-color: white;
+    border: none;
+    height: 40px;
+    color: white;
+    width: 150px;
+    font-size: 17px;
+    margin-left: 10px;
+    color: limegreen;
+    font-weight: bold;
+    background-color:  white;
+    color: limegreen;
+    border-color: #2ecc71;
+    border: 2px solid limegreen; 
+}
+
+#sign-up-button:hover {
+    background-color: #2ecc71; /* Green button */
+    color: white; /* White text */
+    border: 2px solid limegreen; /* White border on hover */
+}
