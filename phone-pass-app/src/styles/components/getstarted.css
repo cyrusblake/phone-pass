@@ -1,0 +1,8 @@
+.getstarted-container{
+
+    justify-content: center; /* Add this for vertical centering */
+    /* min-height: 100vh; */
+    margin: 0 auto; /* Center horizontally */
+    box-sizing: border-box; /* Include padding in width calculation */
+
+}

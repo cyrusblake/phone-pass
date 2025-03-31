@@ -11,7 +11,7 @@ import {
 import { getUserProfile, createUserProfile } from '../api/firestore';
 import '../styles/components/signup.css';
 import Navbar from "../components/Navbar";
-import SigButton from '../components/SigButton';
+
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -61,57 +61,60 @@ const Signup = () => {
         <Navbar />
       </div>
 
-      <div className='form-container'>
-        <form className='form-box' onSubmit={handleSubmit}>
-          <h1>First Name</h1>
-          <input 
-            name='firstName' 
-            value={firstName}
-            onChange={e => setFirstName(e.target.value)}
-            required
-          />
-          <br />
-          <h1>Last Name</h1>
-          <input 
-            name='lastName' 
-            value={lastName}
-            onChange={e => setLastName(e.target.value)}
-            required
-          />
-          <br />
-          <h1>Your Email</h1>
-          <input
-            name='email'
-            type='email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}   
-            autoComplete='email'
-            required
-          />
-          <br />
-          <h1>Password</h1>
-          <input
-            name='password'
-            type='password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            autoComplete='new-password'
-            required
-            minLength={6}
-          />
-          <br />
-          {error && <div className="error-message">{error}</div>}
-          <button id='sign-up-button' type="submit">Sign Up</button>
-          <br />
-          <h1>Or</h1>
-          <br/>
-          <Link to="/login">
-              <button id='sign-up-button'>Log In</button>
-          </Link>
-        </form>
-        
+      <div className="signup-container">
+          <div className='form-container'>
+          <form className='form-box' onSubmit={handleSubmit}>
+            <h1>First Name</h1>
+            <input 
+              name='firstName' 
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
+              required
+            />
+            <br />
+            <h1>Last Name</h1>
+            <input 
+              name='lastName' 
+              value={lastName}
+              onChange={e => setLastName(e.target.value)}
+              required
+            />
+            <br />
+            <h1>Your Email</h1>
+            <input
+              name='email'
+              type='email'
+              value={email}
+              onChange={e => setEmail(e.target.value)}   
+              autoComplete='email'
+              required
+            />
+            <br />
+            <h1>Password</h1>
+            <input
+              name='password'
+              type='password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              autoComplete='new-password'
+              required
+              minLength={6}
+            />
+            <br />
+            {error && <div className="error-message">{error}</div>}
+            <button id='sign-up-button' type="submit">Sign Up</button>
+            <br />
+            <h1>Or</h1>
+            <br/>
+            <Link to="/login">
+                <button id='sign-up-button'>Log In</button>
+            </Link>
+          </form>
+          
 
+        </div>
       </div>
+      
     </>
   );
 };

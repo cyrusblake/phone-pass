@@ -80,45 +80,47 @@ const Login = () => {
         <Navbar />
       </div>
 
+
+      <div className="signup-container">
       <div id="main">
-
-
-          <div className='form-container'>
-          <form className='form-box' onSubmit={handleSubmit}>
-            <h1>Your Email</h1>
-            <input
-              name='email'
-              type='email'
-              value={email}
-              onChange={e => setEmail(e.target.value)}   
-              autoComplete='email'
-              required
-            />
-            <br />
-            <h1>Password</h1>
-            <input
-              name='password'
-              type='password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              autoComplete='new-password'
-              required
-              minLength={6}
-            />
-            <br />
-            {error && <div className="error-message">{error}</div>}
-            <button id='sign-up-button' type="submit">Log In</button>
-            <br />
-            <h1>Or</h1>
-            <br/>
-            <Link to="/signup">
-                <button id='sign-up-button'>Sign Up</button>
-            </Link>
-          </form>
-        
-          
+              <div className='form-container'>
+              <form className='form-box' onSubmit={handleSubmit}>
+                <h1>Your Email</h1>
+                <input
+                  name='email'
+                  type='email'
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}   
+                  autoComplete='email'
+                  required
+                />
+                <br />
+                <h1>Password</h1>
+                <input
+                  name='password'
+                  type='password'
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  autoComplete='new-password'
+                  required
+                  minLength={6}
+                />
+                <br />
+                {error && <div className="error-message">{error}</div>}
+                <button id='sign-up-button' type="submit">Log In</button>
+                <br />
+                <h1>Or</h1>
+                <br/>
+                <Link to="/signup">
+                    <button id='sign-up-button'>Sign Up</button>
+                </Link>
+            </form>
+            
+              
+          </div>
         </div>
       </div>
+    
 
       
     </>

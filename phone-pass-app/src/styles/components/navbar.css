@@ -14,9 +14,9 @@
 
 .nb {
     background-color:  white;
-    color: limegreen;
+    color: #2ecc71;
     border-color: #2ecc71;
-    border: 2px solid limegreen; /* Light gray border */
+    border: 2px solid #2ecc71; /* Light gray border */
     /* border-radius: 5px; */
     
     font-weight: bold;
@@ -25,5 +25,5 @@
 .nb:hover {
     background-color: #2ecc71; /* Green button */
     color: white; /* White text */
-    border: 2px solid limegreen; /* White border on hover */
+    border: 2px solid #2ecc71; /* White border on hover */
 }

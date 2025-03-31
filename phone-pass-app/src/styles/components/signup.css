@@ -1,19 +1,25 @@
 /* Add this to your existing CSS */
 body, html {
-    height: 100%;
-    margin: 0;
+    /* height: 100%; */
+    /* margin: 0; */
+    
   }
 
   .nav-container{
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
   }
   
+.signup-container {
+    /* min-height: 100vh; */
+}
+
 .form-container {
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center; /* Add this for vertical centering */
-    background-color: limegreen;
+    background-color: #2ecc71;
     padding: 20px; /* Increased padding for better spacing */
     width: min-content;
     /* min-height: 100vh; */
@@ -69,16 +75,16 @@ input {
     width: 150px;
     font-size: 17px;
     margin-left: 10px;
-    color: limegreen;
+    color: #2ecc71;
     font-weight: bold;
     background-color:  white;
-    color: limegreen;
+    color: #2ecc71;
     border-color: #2ecc71;
-    border: 2px solid limegreen; 
+    border: 2px solid #2ecc71; 
 }
 
 #sign-up-button:hover {
     background-color: #2ecc71; /* Green button */
     color: white; /* White text */
-    border: 2px solid limegreen; /* White border on hover */
+    border: 2px solid #2ecc71; /* White border on hover */
 }

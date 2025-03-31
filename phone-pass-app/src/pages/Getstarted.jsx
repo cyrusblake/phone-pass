@@ -11,7 +11,7 @@ import {
 import { getUserProfile, createUserProfile } from '../api/firestore';
 import SigButton from '../components/SigButton';
 import Navbar from "../components/Navbar";
-// import './Login.css';
+import '../styles/components/getstarted.css';
 
 export default function GetStarted() {
     const navigate = useNavigate();
@@ -42,9 +42,11 @@ export default function GetStarted() {
             <div className="nav-container">
               <Navbar/>
             </div>
-            <div className='login-container'>
+            
+            <div className='getstarted-container'>
               <h1> Welcome to PhonePass</h1>
-                <div className='login-logo'>PhonePass</div>
+              <br/>
+                <div className='login-logo'></div>
                 <div className=''>
                   <SigButton 
                     onClick={() => {
