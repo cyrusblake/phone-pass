@@ -5,7 +5,7 @@ const SigButton = ({ onClick }) => {
   return (
     <button
       type="button"
-      className="nb"
+      className="google-button"
       onClick={onClick}
     >
       Continue With Google

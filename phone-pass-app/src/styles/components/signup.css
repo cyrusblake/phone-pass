@@ -11,6 +11,7 @@ body, html {
   
 .signup-container {
     /* min-height: 100vh; */
+    margin-top: 50px;
 }
 
 .form-container {
@@ -33,7 +34,7 @@ body, html {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    width: 310px;
+    width: 285px;
     background-color: white; 
     border-radius: 10px; /* Optional: for rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: for subtle shadow */
@@ -46,7 +47,7 @@ body, html {
 }
 
 input {
-    border: solid 1px;
+    border: solid 2px  #2ecc71;
     background-color: white;
     width: 90%;
     margin-left: 10px;
@@ -87,4 +88,7 @@ input {
     background-color: #2ecc71; /* Green button */
     color: white; /* White text */
     border: 2px solid #2ecc71; /* White border on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+ 
 }

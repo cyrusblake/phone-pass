@@ -5,7 +5,7 @@ body {
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  /* background-image: url('./assets/fog.gif');  */
+  background-image: url('./assets/fog.gif'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
