@@ -19,6 +19,10 @@ export default function GetStarted() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  if (user) {
+      navigate('/home');
+  }
+
   const handleUserProfile = async (user) => {
     const profile = await getUserProfile(user.uid);
     if (!profile) {

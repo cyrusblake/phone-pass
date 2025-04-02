@@ -12,6 +12,7 @@ import './App.css';
 
 const App = () => {
   return (
+    <> 
     <AuthProvider>
       <Router>
         <Routes>
@@ -24,6 +25,9 @@ const App = () => {
         </Routes>
       </Router>
     </AuthProvider>
+   
+    </>
+   
   );
 };
 

@@ -19,6 +19,7 @@ import {
 import { db } from "../api/firebase";
 import pImage from '../assets/square.png';
 import '../styles/components/home.css';
+import BottomNav from "../components/BottomNav";
 
 
 const GEO_DISTANCE_THRESHOLD = 0.1; // Approx 10km, adjust as needed
@@ -270,6 +271,8 @@ const Home = () => {
           ↻
         </button>
       </div>
+
+      <BottomNav />
     </>
   );
 };

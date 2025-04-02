@@ -3,15 +3,28 @@ import { getUserProfile, getUserAccount, createUserProfile, accountProfile } fro
 import { useAuth } from "../context/AuthContext";
 import '../styles/components/userprofile.css';
 import pImage from '../assets/square.png';
+import { useNavigate } from "react-router-dom";
 
 
 const UserProfile = () => {
-  const { user } = useAuth();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setuserName] = useState("");
   const [bio, setBio] = useState("");
+  
+  
+   const { user, loading, signIn, signOut } = useAuth();
+  
+    const handleClick = () => {
+      if (user) {
+        signOut();
+        navigate("/");
+      } else {
+        signIn();
+      }
+    };
 
   useEffect(() => {
     if (user) {
@@ -62,7 +75,7 @@ const UserProfile = () => {
   return (
     <div>
       <div className="profile-heading">
-        <h1>Profile</h1>
+        <h1 className="up-h1">Profile</h1>
       </div>
       <div className="container">
         
@@ -88,7 +101,19 @@ const UserProfile = () => {
         />
         <button onClick={handleSave2} className="u-button">Save</button>
       </div>
-      {/* <UpdateUsername /> */}
+      <div>
+
+         {!loading && (
+                <button 
+                  type='button'
+                  className='nb'
+                  onClick={handleClick}
+                >
+                  Log {user ? 'out' : 'in'}
+                </button>
+          )}
+      </div>
+     
     </div>
   );
 };

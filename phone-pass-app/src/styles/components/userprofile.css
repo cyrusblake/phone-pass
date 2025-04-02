@@ -119,3 +119,7 @@ body.dark-mode .dark-mode-button:hover {
 body.dark-mode .profile-heading {
   color: #ffffff; /* White text color for dark mode */
 }
+
+.up-h1{
+  color: white;
+}
