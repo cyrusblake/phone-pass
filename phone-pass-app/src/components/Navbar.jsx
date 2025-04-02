@@ -3,6 +3,7 @@ import '../styles/components/navbar.css';
 import { useAuth } from "../context/AuthContext";
 import ppic from '../assets/square.png';
 import { Link } from "react-router-dom";
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 const Navbar = () => {
   const { user, loading, signIn, signOut } = useAuth();
@@ -23,11 +24,11 @@ const Navbar = () => {
         </h1>
       </div>
       
-      
-      {user &&
-      <Link to="/profile">
-       <img src={ppic} alt="Profile" className="profile-pic" />
-      </Link>}
+      <div>
+        <Link to={user ? "/profile" : "#"} style={{ pointerEvents: user ? "all" : "none" }}>   
+          <AccountCircleRoundedIcon className="profile-pic" sx={{ fontSize: 50 }} />
+        </Link>
+      </div>
 
 
      

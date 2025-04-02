@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import { useState } from 'react';
 import '../styles/components/bottomnav.css';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
+import MapRoundedIcon from '@mui/icons-material/MapRounded';
 
 const BottomNav = () => {
     const { user } = useAuth();
@@ -14,13 +17,13 @@ const BottomNav = () => {
         <>
             <div className='bottom-nav'>
                 <Link to="/map">
-                    <h4>Map</h4>
+                    <MapRoundedIcon className='map-icon' sx={{ fontSize: 40 }} />
                 </Link>
                 <Link to="/home">
-                    <h4>Home</h4>
+                  <HomeRoundedIcon className='home-icon' sx={{ fontSize: 40 }} />
                 </Link>
-                <Link to="friends">
-                    <h4>Friends</h4>
+                <Link to="/friends">
+                    <PeopleAltRoundedIcon className='friends-icon' sx={{ fontSize: 40 }} />
                 </Link> 
             </div>
         </>

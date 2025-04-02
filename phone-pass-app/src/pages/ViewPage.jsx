@@ -44,7 +44,7 @@ const ViewPage = () => {
     <div>
       <Navbar/>
       <div className="profile-heading">
-              <h1>Profile</h1>
+              <h1 className="up-h1">Profile</h1>
             </div>
             <div className="container">
               <div>
