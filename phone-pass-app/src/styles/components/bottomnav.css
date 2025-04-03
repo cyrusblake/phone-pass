@@ -19,10 +19,12 @@
     
 }
 
-.bottom-nav h4{
-    font-size: 1rem;
-    color: #2ecc71;
+
+
+.bottom-nav div{
     background-color: white;
+    font-size: 1rem;
+    color: #2ecc71; 
     border-radius: 10px;
     padding: 2px 5px;
     border: 2px solid #2ecc71;

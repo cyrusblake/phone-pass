@@ -16,15 +16,24 @@ const BottomNav = () => {
 
         <>
             <div className='bottom-nav'>
-                <Link to="/map">
+                <div>
+                     <Link to="/map">
                     <MapRoundedIcon className='map-icon' sx={{ fontSize: 40 }} />
-                </Link>
-                <Link to="/home">
-                  <HomeRoundedIcon className='home-icon' sx={{ fontSize: 40 }} />
-                </Link>
-                <Link to="/friends">
+                    </Link>
+                </div>
+
+                <div>
+                    <Link to="/home">
+                    <HomeRoundedIcon className='home-icon' sx={{ fontSize: 40 }} />
+                    </Link>
+                </div>
+               
+                <div>
+                    <Link to="/friends">
                     <PeopleAltRoundedIcon className='friends-icon' sx={{ fontSize: 40 }} />
-                </Link> 
+                    </Link>
+                </div>
+                 
             </div>
         </>
     );

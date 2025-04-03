@@ -216,8 +216,8 @@ const Home = () => {
       <div>
         <Navbar />
         <div className="welcome-banner">
-          <h1>Welcome {user ? user.displayName : "Guest"} to PhonePass!</h1>
-          <p>Connect with users nearby and exchange data.</p>
+          <h1 className="up-h1">Welcome {user ? user.displayName : "Guest"} to PhonePass!</h1>
+          <p className="up-h1">Connect with users nearby and exchange data.</p>
         </div>
 
         {user && (
@@ -232,7 +232,7 @@ const Home = () => {
           {darkMode ? 'Light Mode' : 'Dark Mode'}
         </button>
 
-        <h2>Interacted Users</h2>
+        <h2 className="up-h1">Interacted Users</h2>
         <div className="interacted-users-container">
           {interactedUsers.length === 0 && !isLoading ? (
             <div className="empty-state">
