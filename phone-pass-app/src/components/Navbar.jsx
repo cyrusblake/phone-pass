@@ -1,20 +1,11 @@
 import React from "react";
 import '../styles/components/navbar.css';
 import { useAuth } from "../context/AuthContext";
-import ppic from '../assets/square.png';
 import { Link } from "react-router-dom";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 const Navbar = () => {
-  const { user, loading, signIn, signOut } = useAuth();
-
-  const handleClick = () => {
-    if (user) {
-      signOut();
-    } else {
-      signIn();
-    }
-  };
+  const { user } = useAuth();
 
   return (
     <nav className="navbar">
@@ -29,22 +20,6 @@ const Navbar = () => {
           <AccountCircleRoundedIcon className="profile-pic" sx={{ fontSize: 50 }} />
         </Link>
       </div>
-
-
-     
-      
-            {/* <div>
-              
-              {!loading && (
-                <button 
-                  type='button'
-                  className='nb'
-                  onClick={handleClick}
-                >
-                  Log {user ? 'out' : 'in'}
-                </button>
-              )}
-            </div> */}
     </nav>
   );
 };

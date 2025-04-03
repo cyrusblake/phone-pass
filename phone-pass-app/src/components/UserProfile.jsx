@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUserProfile, getUserAccount, createUserProfile, accountProfile } from "../api/firestore";
 import { useAuth } from "../context/AuthContext";
 import '../styles/components/userprofile.css';
-import pImage from '../assets/square.png';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useNavigate } from "react-router-dom";
 
 
@@ -20,7 +20,8 @@ const UserProfile = () => {
     const handleClick = () => {
       if (user) {
         signOut();
-        navigate("/");
+        navigate('/');
+        
       } else {
         signIn();
       }
@@ -78,27 +79,34 @@ const UserProfile = () => {
         <h1 className="up-h1">Profile</h1>
       </div>
       <div className="container">
-        
-        <img src={pImage} className="pp" alt="Profile" />
+        <AccountCircleRoundedIcon className="profile-pic" sx={{ fontSize: 150 }} />
+        {/* <img src={pImage} className="pp" alt="Profile" /> */}
         <div className="user-info">
           <h2>{userName}</h2>
           <h2>{bio}</h2>
         </div>
       </div>
 
-      <div style={{ maxWidth: "800px", margin: "20px auto", padding: "0 20px" }}>
-        <input
+      <div style={{ maxWidth: "800px", margin: "20px auto", padding: " 20px", borderRadius: "8px",  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)", justifyContent: "center", alignItems: "center" }}>
+      
+         <h2>Account Information</h2> 
+         <div>
+           <input
           type="text"
           value={userName}
           onChange={(e) => setuserName(e.target.value)}
           placeholder="Enter your username"
         />
+        </div> 
+       <div>
         <input
           type="text"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           placeholder="Enter your bio"
         />
+       </div>
+        
         <button onClick={handleSave2} className="u-button">Save</button>
       </div>
       <div>

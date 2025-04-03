@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../api/firebase";
 import Navbar from "../components/Navbar";
 import pImage from '../assets/square.png';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import '../styles/components/userprofile.css';
 
 const ViewPage = () => {
@@ -48,7 +49,8 @@ const ViewPage = () => {
             </div>
             <div className="container">
               <div>
-                <img src={pImage} className="pp" alt="Profile" />
+                {/* <img src={pImage} className="pp" alt="Profile" /> */}
+                <AccountCircleRoundedIcon className="profile-pic" sx={{ fontSize: 150 }} />
               </div>
               <div className="user-info">
                <h1>{userProfile.username}</h1>

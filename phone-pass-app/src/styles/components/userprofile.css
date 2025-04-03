@@ -50,7 +50,7 @@
 /* Input Fields */
 input[type="text"] {
   width: 100%;
-  max-width: 400px; /* Limit input width */
+  max-width: 360px; /* Limit input width */
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc; /* Light gray border */
@@ -75,7 +75,7 @@ input[type="text"]:focus {
   cursor: pointer;
   transition: background-color 0.3s ease; /* Smooth transition */
   width: 100%;
-  max-width: 400px; /* Limit button width */
+  max-width: 300px; /* Limit button width */
 }
 
 .u-button:hover {
@@ -122,4 +122,14 @@ body.dark-mode .profile-heading {
 
 .up-h1{
   color: white;
+}
+
+.profile-pic {
+  color:#2ecc71; /* Ensure the icon has a visible color */
+  border-radius: 50%; /* Circular profile picture */
+  border: 2px solid #2ecc71; /* Green border */
+  object-fit: cover; /* Ensure the image fits well */
+  margin-bottom: 20px; /* Add spacing below the image */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
 }

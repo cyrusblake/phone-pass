@@ -20,6 +20,8 @@ import { db } from "../api/firebase";
 import pImage from '../assets/square.png';
 import '../styles/components/home.css';
 import BottomNav from "../components/BottomNav";
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+
 
 
 const GEO_DISTANCE_THRESHOLD = 0.1; // Approx 10km, adjust as needed
@@ -243,7 +245,8 @@ const Home = () => {
             interactedUsers.map((interaction, index) => (
               <div className="home-container" key={index}>
                 <div>
-                  <img src={pImage} className="home-pp" alt="Profile" />
+                  {/* <img src={pImage} className="home-pp" alt="Profile" /> */}
+                  <AccountCircleRoundedIcon className="home-pp" sx={{ fontSize: 125 }} />
                 </div>
                 <div>
                   <h3>
