@@ -49,8 +49,8 @@
 
 /* Input Fields */
 input[type="text"] {
-  width: 100%;
-  max-width: 360px; /* Limit input width */
+  width: 80%;
+  max-width: 300px; /* Limit input width */
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc; /* Light gray border */
@@ -74,7 +74,7 @@ input[type="text"]:focus {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease; /* Smooth transition */
-  width: 100%;
+  width: 80%;
   max-width: 300px; /* Limit button width */
 }
 
