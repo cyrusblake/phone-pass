@@ -1,6 +1,6 @@
 /* User Profile Container */
 .container {
-  border: 2px solid #2ecc71; /* Green border */
+  border: 3px solid #2ecc71; /* Green border */
   border-radius: 10px; /* Rounded corners */
   padding: 20px; /* Add some padding */
   display: flex; /* Use flexbox for centering */
