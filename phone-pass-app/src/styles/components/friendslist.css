@@ -1,7 +1,27 @@
 .f1 {
-    color: white
+    color: white;
+    margin-top: 80px;
+    margin-bottom:50px;
 }
 
 .f-usernames {
-    color: white
+    color: white;
+    margin-left: 20px;
+}
+
+
+.acri {
+    color: #2ecc71; 
+
+}
+
+.friend-card-content {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    
 }

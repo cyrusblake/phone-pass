@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import BottomNav from "../components/BottomNav";
 import { getUserFriends } from "../api/firestore";
 import '../styles/components/friendslist.css';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 const FriendsList = () => {
     const { user } = useAuth();
@@ -41,6 +42,7 @@ const FriendsList = () => {
     return (
         <>
             <Navbar />
+           
             <div className="friends-container">
                 <h1 className="f1">Friends List</h1>
                 
@@ -50,11 +52,13 @@ const FriendsList = () => {
                     <div className="friends-grid">
                         {friends.map((friend, index) => (
                             <div key={index} className="friend-card">
+                           
                                 <Link to={`/viewPage/${friend.userId}`}>
-                                    <div className="friend-avatar">
-                                        {/* Add avatar/image here */}
+                                    <div className="friend-card-content">
+                                        <AccountCircleRoundedIcon className="home-pp" sx= { {fontSize: 40}}/>
+                                        <h3 className="f-usernames">{friend.username}</h3>
                                     </div>
-                                    <h3 className="f-usernames">{friend.username}</h3>
+                                    
                                 </Link>
                             </div>
                         ))}
