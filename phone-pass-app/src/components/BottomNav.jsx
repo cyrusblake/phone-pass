@@ -30,7 +30,8 @@ const BottomNav = () => {
                
                 <div>
                     <Link to="/friends">
-                    <PeopleAltRoundedIcon className='friends-icon' sx={{ fontSize: 40 }} />
+                    <PeopleAltRoundedIcon className='friends-icon' sx={{ fontSize: 40
+                     }} />
                     </Link>
                 </div>
                  
