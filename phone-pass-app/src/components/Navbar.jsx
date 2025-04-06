@@ -11,7 +11,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div>
         <h1 className="nh">
-          <a href="/">PhonePass</a>
+          <a href="/">PassBy</a>
         </h1>
       </div>
       

@@ -88,8 +88,9 @@ const Home = () => {
       <div>
         <Navbar />
         <div className="welcome-banner">
-          <h1 className="up-h1">Welcome {user?.displayName || "Guest"} to PhonePass!</h1>
-          <p className="up-h1">Connect with users nearby and exchange data.</p>
+          <h1 className="up-h1">Welcome {user?.displayName || "Guest"} to PassBy!</h1>
+          <p className="up-h1">Meet The World Around You!</p>
+       
         </div>
 
         <button 

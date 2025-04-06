@@ -64,8 +64,8 @@ export default function GetStarted() {
           </div>
           
           <div className='getstarted-container'>
-              <h1 className="h1-main">Welcome to PhonePass</h1>
-              
+              <h1 className="h1-main">Welcome to PassBy</h1>
+        
               <div className="button-container">
                   <SigButton 
                       onClick={handleGoogleSignIn}
