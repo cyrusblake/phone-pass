@@ -53,22 +53,20 @@ const FriendsList = () => {
                     <div className="friends-grid">
                         {friends.map((friend, index) => (
                             <div key={index} className="friend-card">
-                                
-                                <Link to={`/viewPage/${friend.userId}`}>
-                                    
-                                    <div className="friend-card-content">
-                                        
+                                <div className="friend-card-content">
+                                    <Link to={`/viewPage/${friend.userId}`}>
                                         <AccountCircleRoundedIcon className="home-pp" sx= { {fontSize: 40}}/>
+                                    </Link>
                                         
-                                        <div className="friend-details">
+                                    <div className="friend-details">
+                                        <Link to={`/viewPage/${friend.userId}`}>
                                             <h3 className="f-usernames">{friend.username}</h3>
+                                        </Link>
+                                        <Link>
                                             <ChatIcon className="friend-icon" sx={{ fontSize: 20 }} />
-                                        </div>
-
-
+                                        </Link>
                                     </div>
-                                    
-                                </Link>
+                                </div>                              
                             </div>
                         ))}
                     </div>
