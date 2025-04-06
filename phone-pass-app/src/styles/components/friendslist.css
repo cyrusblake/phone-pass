@@ -7,7 +7,7 @@
     flex-direction: column; /* Always stack items vertically */
     /* Center-align items horizontally */
     justify-content: center; /* Center-align items vertically */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  */
     margin: 20px auto; /* Center the container */
     max-width: 800px; /* Limit the width */
     text-align: center; /* Center-align text */
@@ -23,7 +23,7 @@
 }
 
 .f-usernames {
-    color: white;
+    color: black;
     margin-left: 20px;
 }
 
@@ -37,9 +37,19 @@
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    background-color: white;
+    border: solid 3px #2ecc71; /* Green border */
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
     
+    
+}
+
+.friend-details {
+    align-items: center;
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
 }
