@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
@@ -19,9 +19,12 @@ export default function GetStarted() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  if (user) {
+  useEffect(() => {
+    if (user) {
       navigate('/home');
-  }
+    }
+     }, [user, navigate]);
+ 
 
   const handleUserProfile = async (user) => {
     const profile = await getUserProfile(user.uid);
