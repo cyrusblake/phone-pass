@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc,  arrayUnion, updateDoc} from "firebase/firestore";
+import { doc, getDoc, setDoc,  arrayUnion,  serverTimestamp, updateDoc} from "firebase/firestore";
 import { db } from './firebase';
 
 
@@ -24,32 +24,6 @@ export const getUserAccount = async (uid) => {
   }
 };
 
-export const addFriend = async (currentUserId, friendUserId) => {
-  try {
-    // First get the friend's username
-    const friendDoc = await getDoc(doc(db, "profiles", friendUserId));
-    if (!friendDoc.exists()) {
-      throw new Error("Friend user not found");
-    }
-    
-    const friendData = friendDoc.data();
-    const friendInfo = {
-      userId: friendUserId,
-      username: friendData.username || friendData.displayName || "Unknown"
-    };
-
-    // Update current user's friends array
-    const userRef = doc(db, "friends", currentUserId);
-    await updateDoc(userRef, {
-      friends: arrayUnion(friendInfo)
-    });
-    
-    return friendInfo;
-  } catch (error) {
-    console.error("Error adding friend:", error);
-    throw error;
-  }
-};
 
 export const getUserFriends = async (userId) => {
   const userRef = doc(db, "friends", userId);
@@ -57,6 +31,25 @@ export const getUserFriends = async (userId) => {
   return userDoc.data()?.friends || [];
 };
 
+export const addFriend = async (currentUserId, friendData) => {
+  try {
+    const friendsRef = doc(db, "friends", currentUserId);
+    
+    await updateDoc(friendsRef, {
+      friends: arrayUnion({
+        userId: friendData.userId,
+        username: friendData.username,
+        // bio: friendData.bio || '',
+        // addedAt: new Date().toISOString() 
+      })
+    });
+    
+    return true;
+  } catch (error) {
+    console.error("Error adding friend:", error);
+    throw error;
+  }
+};
 
 export const createUserProfile = async (uid, profile) => {
   const userDoc = doc(db, "users", uid);

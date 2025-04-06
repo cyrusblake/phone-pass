@@ -42,9 +42,9 @@ const FriendsList = () => {
     return (
         <>
             <Navbar />
-           
+           <h1 className="f1">Friends List</h1>
             <div className="friends-container">
-                <h1 className="f1">Friends List</h1>
+                
                 
                 {friends.length === 0 ? (
                     <p>You haven't added any friends yet.</p>

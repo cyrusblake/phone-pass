@@ -1,7 +1,25 @@
+
+
+.friends-container {
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Add some padding */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Always stack items vertically */
+    /* Center-align items horizontally */
+    justify-content: center; /* Center-align items vertically */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 20px auto; /* Center the container */
+    max-width: 800px; /* Limit the width */
+    text-align: center; /* Center-align text */
+}
+
+
 .f1 {
-    color: white;
-    margin-top: 80px;
-    margin-bottom:50px;
+    margin-top: 80px; /* Add space between navbar and h1 */
+    text-align: center; /* Center-align the heading */
+    font-size: 2.5rem; /* Larger font size */
+    font-weight: 600; /* Bold text */
+    color: white; /* Dark text color */
 }
 
 .f-usernames {
