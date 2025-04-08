@@ -19,7 +19,7 @@ const Home = () => {
   const [interactedUsers, setInteractedUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
-  const [addingFriend, setAddingFriend] = useState(null);
+  // const [addingFriend, setAddingFriend] = useState(null);
 
   useEffect(() => {
     if (user) handleGetUserLocation();
