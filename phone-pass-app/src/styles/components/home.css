@@ -100,7 +100,7 @@ p {
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 20px;
+  padding: 10px;
   background: linear-gradient(135deg, #ffffff, #f1f3f5); /* Light gradient */
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);

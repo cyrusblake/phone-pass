@@ -111,10 +111,7 @@ const Home = () => {
             interactedUsers.map((interaction) => (
               <div className="home-container" key={interaction.userId}>
                 <div>
-                  <AccountCircleRoundedIcon 
-                    className="home-pp" 
-                    sx={{ fontSize: 125 }} 
-                  />
+                  <AccountCircleRoundedIcon className="home-pp"  sx={{ fontSize: 100 }} />
                 </div>
                 <div>
                   <PersonAddAltRoundedIcon className="add-b" sx={{ fontSize: 20}} 
