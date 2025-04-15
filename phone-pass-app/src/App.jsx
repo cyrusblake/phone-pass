@@ -6,9 +6,10 @@ import ViewPage from "./pages/ViewPage.jsx";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import Getstarted from "./pages/Getstarted.jsx";
-import Navbar from "./components/Navbar";
 import FriendsList from "./pages/FriendsList.jsx";
+import EditPage from "./pages/EditPage.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import Map from "./pages/Map.jsx";
 import './App.css';
 
 const App = () => {
@@ -24,6 +25,8 @@ const App = () => {
           <Route path="/" element={<Getstarted />} />
           <Route path="/friends" element={<FriendsList />} />
           <Route path="/ViewPage/:userId" element={<ViewPage/>} />
+          <Route path="/editpage" element={<EditPage />} />
+          <Route path="/map" element={<Map/>}/>
         </Routes>
       </Router>
     </AuthProvider>

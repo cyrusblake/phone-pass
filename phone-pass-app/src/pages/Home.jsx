@@ -93,12 +93,15 @@ const Home = () => {
        
         </div>
 
-        <button 
+        <div className="dark-mode-div">
+          <button 
           className="btn btn-secondary" 
           onClick={() => setDarkMode(!darkMode)}
-        >
+          >
           {darkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
+          </button>
+        </div>
+        
 
         <h2 className="up-h1">Interacted Users</h2>
         <div className="interacted-users-container">

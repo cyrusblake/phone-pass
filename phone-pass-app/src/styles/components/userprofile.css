@@ -7,11 +7,47 @@
   flex-direction: column; /* Always stack items vertically */
   align-items: center; /* Center-align items horizontally */
   justify-content: center; /* Center-align items vertically */
-  background-color: #ffffff; /* White background */
+  /* background-image: url('./assets/fog.gif');  */
+  background-color: #ffffff; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   margin: 20px auto; /* Center the container */
   max-width: 800px; /* Limit the width */
-  text-align: center; /* Center-align text */
+  text-align: center; 
+}
+
+.info-section {
+  color: white;
+  font-size: 1rem; /* Font size for the info section */
+}
+
+.bio-text-container {
+  background-color: white;
+  color: #2ecc71; /* Green background */
+  padding: 10px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  margin: 10px; /* Add spacing between items */
+  font-size: 1rem; /* Font size for interests */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */ 
+  
+
+}
+
+.interests-container {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  margin-top: 20px; /* Add spacing above the interests section */
+  margin-bottom: 20px;
+}
+
+.interests-container p {
+  background-color: white; /* Green background */
+  color:#2ecc71; /* White text */
+  padding: 5px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  margin: 10px; /* Add spacing between items */
+  font-size: 1rem; /* Font size for interests */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  
 }
 
 /* Profile Picture */
@@ -91,6 +127,7 @@ input[type="text"]:focus {
   cursor: pointer;
   transition: color 0.3s ease; /* Smooth transition for color */
   color: #333; /* Default color for light mode */
+
 }
 
 .dark-mode-button:hover {
@@ -122,6 +159,7 @@ body.dark-mode .profile-heading {
 
 .up-h1{
   color: white;
+  text-align: center;
 }
 
 .profile-pic {
@@ -132,4 +170,17 @@ body.dark-mode .profile-heading {
   margin-bottom: 20px; /* Add spacing below the image */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 
+}
+.log-out-button {
+  text-align: center;
+}
+
+.info-div {
+  margin-left: 20px;
+}
+
+.edit-icon-container {
+  text-align: right;
+  margin-right: 20px;
+  color: #2ecc71;
 }

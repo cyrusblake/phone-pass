@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getUserProfile, getUserAccount, createUserProfile, accountProfile } from "../api/firestore";
+import { getUserProfile, getUserAccount, createUserProfile } from "../api/firestore";
 import { useAuth } from "../context/AuthContext";
 import '../styles/components/userprofile.css';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import { useNavigate } from "react-router-dom";
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import { Link, useNavigate } from "react-router-dom";
 
 
 const UserProfile = () => {
@@ -62,16 +63,6 @@ const UserProfile = () => {
     }
   };
 
-  const handleSave2 = async () => {
-    if (user) {
-      await accountProfile(user.uid, {
-        bio: bio,
-        uid: user.uid,
-        username: userName
-      });
-      alert("Profile saved!");
-    }
-  };
 
   return (
     <div>
@@ -83,33 +74,46 @@ const UserProfile = () => {
         {/* <img src={pImage} className="pp" alt="Profile" /> */}
         <div className="user-info">
           <h2>{userName}</h2>
-          <h2>{bio}</h2>
         </div>
       </div>
 
       <div style={{ maxWidth: "800px", margin: "20px auto", padding: " 20px", borderRadius: "8px",  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)", justifyContent: "center", alignItems: "center" }}>
-      
-         <h2>Account Information</h2> 
-         <div>
-           <input
-          type="text"
-          value={userName}
-          onChange={(e) => setuserName(e.target.value)}
-          placeholder="Enter your username"
-        />
-        </div> 
-       <div>
-        <input
-          type="text"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          placeholder="Enter your bio"
-        />
-       </div>
-        
-        <button onClick={handleSave2} className="u-button">Save</button>
+        <div className="info-div">
+            <h2 className="info-section">My Bio</h2>
+
+                <p className="bio-text-container">{bio}
+                 </p>
+
+          
+
+            <div>
+              <h2 className="info-section">About Me</h2>
+              <div className="interests-container">
+                <p>6'2</p>
+                <p>Active</p>
+                <p>In College</p>
+                <p>Taurus</p>
+                <p>Liberal</p>
+              </div>
+            </div>
+            <div>
+              <h2 className="info-section">Interests</h2>
+              <div className="interests-container">
+                <p>Coding</p>
+                <p>Gaming</p>
+                <p>Photography</p>
+                <p>Go Karting</p>
+                <p>Streaming</p>
+              </div>
+            </div>
+          <div className="edit-icon-container">
+            <Link to="/editpage" className="edit-link">
+              <EditRoundedIcon className="edit-icon" sx={{ fontSize: 30 }} />
+            </Link>
+          </div>
+        </div>
       </div>
-      <div>
+      <div className="log-out-button">
 
          {!loading && (
                 <button 

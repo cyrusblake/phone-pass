@@ -80,6 +80,7 @@ p {
 .welcome-banner p {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.9);
+  
 }
 
 /* Interacted Users Container */
@@ -99,6 +100,7 @@ p {
 .home-container {
   display: flex;
   align-items: center;
+  text-align: center;
   gap: 15px;
   padding: 10px;
   background: linear-gradient(135deg, #ffffff, #f1f3f5); /* Light gradient */
@@ -179,10 +181,16 @@ p {
   background-color: #2ecc71;
   color: white;
   border: none;
+ 
 }
+
 
 .btn-primary:hover {
   background-color: #27ae60; /* Darker green on hover */
+}
+
+.dark-mode-div {
+  text-align: center;
 }
 
 .btn-secondary {
@@ -190,6 +198,7 @@ p {
   color: white;
   border-radius:20px;
   margin-top: 10px;
+  
 }
 
 .btn-secondary:hover {
