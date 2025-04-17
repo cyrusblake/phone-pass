@@ -31,18 +31,6 @@ const UserProfile = () => {
   useEffect(() => {
     if (user) {
       const fetchProfile = async () => {
-        const profileData = await getUserProfile(user.uid);
-        setProfile(profileData);
-        setName(profileData?.name || "");
-        setEmail(profileData?.email || "");
-      };
-      fetchProfile();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      const fetchProfile = async () => {
         const accountData = await getUserAccount(user.uid);
         setProfile(accountData);
         setuserName(accountData?.username || "");
@@ -51,17 +39,6 @@ const UserProfile = () => {
       fetchProfile();
     }
   }, [user]);
-
-  const handleSave = async () => {
-    if (user) {
-      await createUserProfile(user.uid, {
-        email: user.email,
-        name: name,
-        uid: user.uid
-      });
-      alert("Profile saved!");
-    }
-  };
 
 
   return (

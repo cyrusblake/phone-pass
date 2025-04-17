@@ -1,3 +1,11 @@
 .edit-page {
     text-align: center;
 }
+
+.i-input {
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 20px;    
+    font-size: 20px;
+
+}
