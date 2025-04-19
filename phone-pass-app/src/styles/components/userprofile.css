@@ -179,6 +179,6 @@ body.dark-mode .profile-heading {
   padding: 8px 12px; /* Add padding inside each item */
   border-radius: 16px; /* Rounded corners */
   font-size: 14px; /* Adjust font size */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
 }
