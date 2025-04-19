@@ -14,6 +14,7 @@ const UserProfile = () => {
   const [email, setEmail] = useState("");
   const [userName, setuserName] = useState("");
   const [bio, setBio] = useState("");
+  const [interests, setInterests] = useState([]);
   
   
    const { user, loading, signIn, signOut } = useAuth();
@@ -35,6 +36,7 @@ const UserProfile = () => {
         setProfile(accountData);
         setuserName(accountData?.username || "");
         setBio(accountData?.bio || "");
+        setInterests(accountData?.interests || []); // Initialize interests from accountData
       };
       fetchProfile();
     }
@@ -57,30 +59,23 @@ const UserProfile = () => {
       <div style={{ maxWidth: "800px", margin: "20px auto", padding: " 20px", borderRadius: "8px",  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)", justifyContent: "center", alignItems: "center" }}>
         <div className="info-div">
             <h2 className="info-section">My Bio</h2>
-
-                <p className="bio-text-container">{bio}
-                 </p>
-
-          
-
+                <p className="bio-text-container">{bio}</p>
             <div>
               <h2 className="info-section">About Me</h2>
               <div className="interests-container">
-                <p>6'2</p>
-                <p>Active</p>
-                <p>In College</p>
-                <p>Taurus</p>
-                <p>Liberal</p>
+               <div className="interest-item">
+                null
+               </div>
               </div>
             </div>
             <div>
               <h2 className="info-section">Interests</h2>
               <div className="interests-container">
-                <p>Coding</p>
-                <p>Gaming</p>
-                <p>Photography</p>
-                <p>Go Karting</p>
-                <p>Streaming</p>
+                {interests.map((interest, index) => (
+                  <div key={index} className="interest-item">
+                    {interest}
+                  </div>
+                ))}
               </div>
             </div>
           <div className="edit-icon-container">

@@ -25,30 +25,12 @@
   color: #2ecc71; /* Green background */
   padding: 10px; /* Add padding */
   border-radius: 5px; /* Rounded corners */
-  margin: 10px; /* Add spacing between items */
   font-size: 1rem; /* Font size for interests */
   transition: transform 0.3s ease; /* Smooth transition for hover effect */ 
-  
 
 }
 
-.interests-container {
-  display: flex; /* Use flexbox for layout */
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
-  margin-top: 20px; /* Add spacing above the interests section */
-  margin-bottom: 20px;
-}
 
-.interests-container p {
-  background-color: white; /* Green background */
-  color:#2ecc71; /* White text */
-  padding: 5px; /* Add padding */
-  border-radius: 5px; /* Rounded corners */
-  margin: 10px; /* Add spacing between items */
-  font-size: 1rem; /* Font size for interests */
-  transition: transform 0.3s ease; /* Smooth transition for hover effect */
-  
-}
 
 /* Profile Picture */
 .pp {
@@ -183,4 +165,20 @@ body.dark-mode .profile-heading {
   text-align: right;
   margin-right: 20px;
   color: #2ecc71;
+}
+
+.interests-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 10px; /* Add spacing between items */
+}
+
+.interest-item {
+  background-color: white; /* Light gray background */
+  color:#2ecc71; /* Text color */
+  padding: 8px 12px; /* Add padding inside each item */
+  border-radius: 16px; /* Rounded corners */
+  font-size: 14px; /* Adjust font size */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  margin-bottom: 10px;
 }
