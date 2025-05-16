@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import { 
   getAuth, 
@@ -23,13 +22,11 @@ export default function GetStarted() {
     if (user) {
       navigate('/home');
     }
-     }, [user, navigate]);
- 
+  }, [user, navigate]);
 
   const handleUserProfile = async (user) => {
     const profile = await getUserProfile(user.uid);
     if (!profile) {
-        // For Google sign-in, user might have displayName and no firstName/lastName
       const nameParts = user.displayName ? user.displayName.split(' ') : ['', ''];
       const firstName = nameParts[0] || '';
       const lastName = nameParts.slice(1).join(' ') || '';
@@ -44,20 +41,26 @@ export default function GetStarted() {
   };
 
   const handleGoogleSignIn = async () => {
-      setIsLoading(true);
-      setError('');
-      try {
-          const auth = getAuth();
-          const provider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, provider);
-          await handleUserProfile(result.user);
-          navigate('/home');
-      } catch (error) {
-          setError(error.message);
-          console.error("Error with Google sign-in:", error);
-      } finally {
-          setIsLoading(false);
-      }
+    setIsLoading(true);
+    setError('');
+    try {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+
+      // Force account selection
+      provider.setCustomParameters({
+        prompt: 'select_account',
+      });
+
+      const result = await signInWithPopup(auth, provider);
+      await handleUserProfile(result.user);
+      navigate('/home');
+    } catch (error) {
+      setError(error.message);
+      console.error("Error with Google sign-in:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -91,5 +94,5 @@ export default function GetStarted() {
               </div>
           </div>
       </>
-  )
+  );
 }
