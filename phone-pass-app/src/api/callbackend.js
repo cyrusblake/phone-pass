@@ -1,6 +1,6 @@
 async function fetchFromBackend() {
   try {
-    const response = await fetch('https://fastapi-example-ly1n.onrender.com', {
+    const response = await fetch('https://fastapi-example-ly1n.onrender.com/api/data', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ test: "value" })
@@ -16,7 +16,7 @@ function TestConnection() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch('https://fastapi-example-ly1n.onrender.com')
+    fetch('https://fastapi-example-ly1n.onrender.com/api/data')
       .then(res => res.json())
       .then(setData);
   }, []);
