@@ -16,7 +16,7 @@ function TestConnection() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch('https://fastapi-example-ly1n.onrender.com/api/data')
+    fetch('https://fastapi-example-ly1n.onrender.com')
       .then(res => res.json())
       .then(setData);
   }, []);
