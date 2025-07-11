@@ -57,22 +57,22 @@ const Login = () => {
     }
   }   
 
-  const handleUserProfile = async (user) => {
-    const profile = await getUserProfile(user.uid);
-    if (!profile) {
-      // For Google sign-in, user might have displayName and no firstName/lastName
-      const nameParts = user.displayName ? user.displayName.split(' ') : ['', ''];
-      const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
+  // const handleUserProfile = async (user) => {
+  //   const profile = await getUserProfile(user.uid);
+  //   if (!profile) {
+  //     // For Google sign-in, user might have displayName and no firstName/lastName
+  //     const nameParts = user.displayName ? user.displayName.split(' ') : ['', ''];
+  //     const firstName = nameParts[0] || '';
+  //     const lastName = nameParts.slice(1).join(' ') || '';
       
-      await createUserProfile(user.uid, {
-        email: user.email,
-        firstName: firstName,
-        lastName: lastName,
-        name: user.displayName || `${firstName} ${lastName}`,
-      });
-    }
-  };
+  //     await createUserProfile(user.uid, {
+  //       email: user.email,
+  //       firstName: firstName,
+  //       lastName: lastName,
+  //       name: user.displayName || `${firstName} ${lastName}`,
+  //     });
+  //   }
+  // };
 
   return (
     <>

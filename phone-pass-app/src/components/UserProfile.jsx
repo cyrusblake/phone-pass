@@ -6,7 +6,6 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { Link, useNavigate } from "react-router-dom";
 
-
 const UserProfile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
@@ -15,19 +14,29 @@ const UserProfile = () => {
   const [userName, setuserName] = useState("");
   const [bio, setBio] = useState("");
   const [interests, setInterests] = useState([]);
+  const [imagePreview, setImagePreview] = useState(null);
   
+  const { user, loading, signIn, signOut } = useAuth();
   
-   const { user, loading, signIn, signOut } = useAuth();
-  
-    const handleClick = () => {
-      if (user) {
-        signOut();
-        navigate('/');
-        
-      } else {
-        signIn();
-      }
-    };
+  const handleClick = () => {
+    if (user) {
+      signOut();
+      navigate('/');
+    } else {
+      signIn();
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -37,11 +46,15 @@ const UserProfile = () => {
         setuserName(accountData?.username || "");
         setBio(accountData?.bio || "");
         setInterests(accountData?.interests || []); // Initialize interests from accountData
+        
+        // If there's a profile image URL in the account data, use it
+        if (accountData?.profileImageUrl) {
+          setImagePreview(accountData.profileImageUrl);
+        }
       };
       fetchProfile();
     }
   }, [user]);
-
 
   return (
     <div>
@@ -49,11 +62,37 @@ const UserProfile = () => {
         <h1 className="up-h1">Profile</h1>
       </div>
       <div className="container">
-        <AccountCircleRoundedIcon className="profile-pic" sx={{ fontSize: 150 }} />
-        {/* <img src={pImage} className="pp" alt="Profile" /> */}
+        {imagePreview ? (
+          <img 
+            src={imagePreview} 
+            className="profile-pic" 
+            alt="Profile" 
+            style={{ 
+              width: '150px', 
+              height: '150px', 
+              borderRadius: '50%',
+              objectFit: 'cover' 
+            }} 
+          />
+        ) : (
+          <AccountCircleRoundedIcon className="profile-pic" sx={{ fontSize: 150 }} />
+        )}
         <div className="user-info">
           <h2>{userName}</h2>
         </div>
+      </div>
+
+      <div className="mb-1">
+          Image <span className="font-css top">*</span>
+          <div className="">
+              <input 
+                type="file" 
+                id="file-input" 
+                name="ImageStyle"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+          </div>
       </div>
 
       <div style={{ maxWidth: "800px", margin: "20px auto", padding: " 20px", borderRadius: "8px",  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)", justifyContent: "center", alignItems: "center" }}>
@@ -86,7 +125,6 @@ const UserProfile = () => {
         </div>
       </div>
       <div className="log-out-button">
-
          {!loading && (
                 <button 
                   type='button'
@@ -97,7 +135,6 @@ const UserProfile = () => {
                 </button>
           )}
       </div>
-     
     </div>
   );
 };

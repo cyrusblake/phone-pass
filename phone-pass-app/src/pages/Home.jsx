@@ -142,6 +142,7 @@ const Home = () => {
                   <h3><em>{interaction.bio}</em></h3>
                   <button className="btn btn-secondary">Send Message</button>
                 </div>
+                
               </div>
             ))
           )}
@@ -154,12 +155,20 @@ const Home = () => {
               </div>
             </div>
           )}
+          
         </div>
+        
         <button className="fab" onClick={handleGetUserLocation}>
           ↻
         </button>
+
+        {/* <div className="home-footer">
+          <p>© 2023 PassBy. All rights reserved.</p>
+          <p>Made with ❤️ by the PassBy Team</p>
+        </div> */}
+        <BottomNav />
       </div>
-      <BottomNav />
+      
     </>
   );
 };

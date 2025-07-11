@@ -19,9 +19,9 @@ export const db = getFirestore(app);
 export const functions = getFunctions(app, "us-central1"); // Set the correct region
 
 // Enable emulator for local development
-if (import.meta.env.MODE === "development") {
-  connectFunctionsEmulator(functions, "localhost", 5001); // Replace with your emulator's host and port
-}
+// if (import.meta.env.MODE === "development") {
+//   connectFunctionsEmulator(functions, "localhost", 5001); // Replace with your emulator's host and port
+// }
 
 export { httpsCallable };
 export const googleProvider = new GoogleAuthProvider();
